@@ -10,6 +10,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed")
 
 st.title("Foton Incentive Calculator 2025-26")
+st.markdown("""---""")
 
 # Path to your PDF inside the resources folder
 pdf_path = "resources/Detailed Incentive Scheme for FY25-26.pdf"
@@ -30,7 +31,7 @@ if st.session_state.show_pdf:
 
     pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="600" type="application/pdf"></iframe>'
     st.markdown(pdf_display, unsafe_allow_html=True)
-# st.markdown("""---""")
+
 
 designation = st.selectbox("Select your Designation",
                            ["Territory officer", "Area Head"])
