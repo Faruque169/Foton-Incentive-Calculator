@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Realistic Eye Button</title>
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+    }
+
+    .eye-button {
+      width: 160px;
+      height: 100px;
+      background: #1e1e1e;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .eye {
+      position: relative;
+      width: 80px;
+      height: 50px;
+      background: white; /* sclera */
+      border: 2px solid black;
+      border-radius: 50% / 50%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .iris {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 28px;
+      height: 28px;
+      background: radial-gradient(circle at center, #4a90e2 40%, #1e3c72 100%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s linear;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pupil {
+      width: 10px;
+      height: 10px;
+      background: black;
+      border-radius: 50%;
+    }
+
+    .shine {
+      position: absolute;
+      top: 30%;
+      left: 35%;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="eye-button">
+    <div class="eye" id="eye">
+      <div class="iris" id="iris">
+        <div class="pupil"></div>
+        <div class="shine"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const iris = document.getElementById("iris");
+    const eye = document.getElementById("eye");
+
+    document.addEventListener("mousemove", (e) => {
+      const rect = eye.getBoundingClientRect();
+      const eyeCenterX = rect.left + rect.width / 2;
+      const eyeCenterY = rect.top + rect.height / 2;
+
+      const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
+      const radius = 12; // iris movement range
+      const x = radius * Math.cos(angle);
+      const y = radius * Math.sin(angle);
+
+      iris.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+    });
+  </script>
+</body>
+</html>
