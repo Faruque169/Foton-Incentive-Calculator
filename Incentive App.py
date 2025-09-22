@@ -47,7 +47,7 @@ st.subheader("Basic Inputs")
 with st.expander("🔧 Enter Input Details", expanded=True):
     for i in range(num_territories):
         st.markdown(
-            f"### Territory {i+1 if i+1>1 else (i+1 if designation == 'Area Head' else '')}")
+            f"### Territory {i+1 if i+1 > 1 else (i+1 if designation == 'Area Head' else '')}")
         # hide responsibility for TO
         if designation != "Territory officer":
             responsibility = st.selectbox("Select Supervision Type", [
@@ -134,7 +134,7 @@ for i in range(num_territories):
     total_final_incentive += result['final']
 
     st.markdown(f"""
-    #### 📍 Territory {i+1 if i+1>1 else (i+1 if designation == 'Area Head' else '')} Summary:
+    #### 📍 Territory {i+1 if i+1 > 1 else (i+1 if designation == 'Area Head' else '')} Summary:
     - Sales Unit Incentive: TK {result['unit_incentive']:,.0f}
     - Resale Unit Incentive: Tk {result['resale_incentive']:,.0f}
     - Base Incentive: Tk {result['base_incentive']:,.0f}
@@ -170,6 +170,9 @@ else:
         if inputs['achieved'] / inputs['budget'] >= 1.25:
             st.success(
                 f"🎉 Congratulations! You have achieved Foreign Trip within 80,000")
+        else:
+            st.warning(
+                "You need to achieve 25% more than your yearly budget to get the Foreign Trip.")
     else:
         st.info("Check the box if this is your yearly sales.")
 
