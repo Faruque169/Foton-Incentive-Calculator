@@ -158,13 +158,11 @@ if designation != "Territory officer":
     if yearly_sales:
         if sum(achieved_list) / sum(budget_list) >= 1.25:
             st.success(
-                f"🎉 Congratulations! You have achieved Foreign Trip within 80,000")
+                f"🎉 Congratulations! You have achieved Foreign Trip within TK 80,000")
         else:
             st.warning(
                 "You need to achieve 25% more than your yearly budget to get the Foreign Trip.")
 
-    else:
-        st.info("Check the box if this is your yearly sales.")
 else:
     if yearly_sales:
         if inputs['achieved'] / inputs['budget'] >= 1.25:
@@ -173,8 +171,6 @@ else:
         else:
             st.warning(
                 "You need to achieve 25% more than your yearly budget to get the Foreign Trip.")
-    else:
-        st.info("Check the box if this is your yearly sales.")
 
 
 # st.success(
