@@ -4,9 +4,9 @@ def get_achievement_pct(achieved, budget):
 
 
 def get_per_unit_incentive(pct, l1: int, l2=int, l3=int):
-    if pct >= 1.5:
+    if pct > 1.5:
         return l3
-    elif pct >= 1.0:
+    elif pct > 1.0:
         return l2
     elif pct >= 0.8:
         return l1
@@ -79,10 +79,13 @@ def calculate_incentive(inputs, designation, responsibility):
 
     # Step 5: Designation logic
     if designation == "Area Head":
-        if responsibility == "Direct Responsibility":
+        if inputs['responsibility'] == "Complete Responsibility":
+            sup_level_incentive = 1
+            total_adjusted = total_before_mult * sup_level_incentive
+        elif inputs['responsibility'] == "Direct Supervised Responsibility":
             sup_level_incentive = 0.5
             total_adjusted = total_before_mult * sup_level_incentive
-        else:
+        else:  # Additional Supervised Responsibility
             sup_level_incentive = 0.3
             total_adjusted = total_before_mult * sup_level_incentive
     else:

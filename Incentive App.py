@@ -51,7 +51,7 @@ with st.expander("🔧 Enter Input Details", expanded=True):
         # hide responsibility for TO
         if designation != "Territory officer":
             responsibility = st.selectbox("Select Supervision Type", [
-                "Direct Responsibility", "Additional Responsibility"], key=f"responsibility_{i}")
+                "Complete Responsibility", "Direct Supervised Responsibility", "Additional Supervised Responsibility"], key=f"responsibility_{i}")
         else:
             # initialize_key for responsibility"
             if f"responsibility_{i}" not in st.session_state:
@@ -131,6 +131,8 @@ for i in range(num_territories):
     }
     result = calculate_incentive(inputs, designation, responsibility)
 
+    total_final_incentive += result['final']
+
     st.markdown(f"""
     #### 📍 Territory {i+1 if i+1>1 else (i+1 if designation == 'Area Head' else '')} Summary:
     - Sales Unit Incentive: TK {result['unit_incentive']:,.0f}
@@ -171,7 +173,6 @@ else:
     else:
         st.info("Check the box if this is your yearly sales.")
 
-total_final_incentive += result['final']
 
 # st.success(
 #     f"🎉 Total Incentive across all Territories: Tk {total_final_incentive:,.0f}")
