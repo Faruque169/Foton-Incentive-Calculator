@@ -156,21 +156,31 @@ yearly_sales = st.checkbox(
 
 if designation != "Territory officer":
     if yearly_sales:
-        if sum(achieved_list) / sum(budget_list) >= 1.25:
-            st.success(
-                f"🎉 Congratulations! You have achieved Foreign Trip within TK 80,000")
+        total_budget = sum(budget_list)
+        total_achieved = sum(achieved_list)
+        achv_ratio = total_achieved / total_budget
+
+        if total_budget > 0:
+            if achv_ratio >= 1.25:
+                st.success(
+                    f"🎉 Congratulations! You have achieved Foreign Trip within TK 80,000")
+            else:
+                st.warning(
+                    "You need to achieve 25% more than your yearly budget to get the Foreign Trip.")
         else:
-            st.warning(
-                "You need to achieve 25% more than your yearly budget to get the Foreign Trip.")
+            st.error("⚠️ Budget is zero, cannot calculate performance.")
 
 else:
     if yearly_sales:
-        if inputs['achieved'] / inputs['budget'] >= 1.25:
-            st.success(
-                f"🎉 Congratulations! You have achieved Foreign Trip within 80,000")
+        if inputs['budget'] > 0:
+            if inputs['achieved'] / inputs['budget'] >= 1.25:
+                st.success(
+                    f"🎉 Congratulations! You have achieved Foreign Trip within 80,000")
+            else:
+                st.warning(
+                    "You need to achieve 25% more than your yearly budget to get the Foreign Trip.")
         else:
-            st.warning(
-                "You need to achieve 25% more than your yearly budget to get the Foreign Trip.")
+            st.error("⚠️ Budget is zero, cannot calculate performance.")
 
 
 # st.success(
