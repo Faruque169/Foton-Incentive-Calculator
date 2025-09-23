@@ -1,13 +1,16 @@
 # module
-from congratsAnimation import animate_confetti
 from calculations import calculate_incentive
-import base64
+from congratsAnimation import animate_confetti
 from streamlit_extras.metric_cards import style_metric_cards
+import base64
 import streamlit as st
 st.set_page_config(
     page_title="Foton Incentive Calculator", layout="wide",
     page_icon="🧮",
     initial_sidebar_state="collapsed")
+
+# other modules
+# local modules
 
 st.title("Foton Incentive Calculator 2025-26")
 st.markdown("""---""")
