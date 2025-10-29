@@ -1,4 +1,7 @@
+import streamlit as st
 # --- Utility Functions
+
+
 def get_achievement_pct(achieved, budget):
     return achieved / (budget if budget != 0 else 1)
 
@@ -82,9 +85,15 @@ def calculate_incentive(inputs, designation, responsibility):
         if inputs['responsibility'] == "Complete Responsibility":
             sup_level_incentive = 1
             total_adjusted = total_before_mult * sup_level_incentive
-        elif inputs['responsibility'] == "Direct Supervised Responsibility":
+
+        elif inputs['responsibility'] == "Direct Supervised Responsibility" and st.session_state.supervised_target == False:
+            sup_level_incentive = 0.4
+            total_adjusted = total_before_mult * sup_level_incentive
+
+        elif inputs['responsibility'] == "Direct Supervised Responsibility" and st.session_state.supervised_target == True:
             sup_level_incentive = 0.5
             total_adjusted = total_before_mult * sup_level_incentive
+
         else:  # Additional Supervised Responsibility
             sup_level_incentive = 0.3
             total_adjusted = total_before_mult * sup_level_incentive

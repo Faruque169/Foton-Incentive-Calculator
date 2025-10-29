@@ -40,6 +40,10 @@ if st.session_state.show_pdf:
 designation = st.selectbox("Select your Designation",
                            ["Territory officer", "Area Head"])
 
+if designation != "Territory officer":
+    st.session_state.supervised_target = st.checkbox(
+        "**Tick if you and all your supervised territories have achieved 100% or more of your respective budgets.**", key=f"sup_target")
+
 # Number of territories supervised
 num_territories = 1
 if designation != "Territory officer":
@@ -52,10 +56,12 @@ with st.expander("🔧 Enter Input Details", expanded=True):
     for i in range(num_territories):
         st.markdown(
             f"### Territory {i+1 if i+1 > 1 else (i+1 if designation == 'Area Head' else '')}")
+
         # hide responsibility for TO
         if designation != "Territory officer":
             responsibility = st.selectbox("Select Supervision Type", [
                 "Complete Responsibility", "Direct Supervised Responsibility", "Additional Supervised Responsibility"], key=f"responsibility_{i}")
+
         else:
             # initialize_key for responsibility"
             if f"responsibility_{i}" not in st.session_state:
@@ -104,13 +110,13 @@ with st.expander("🔧 Enter Input Details", expanded=True):
 
 
 # --- Results
-
 st.header("Incentive Summary")
 total_final_incentive = 0
 achieved_list = []
 budget_list = []
 achieved_re_list = []
 budget_re_list = []
+
 
 for i in range(num_territories):
     inputs = {
@@ -134,7 +140,6 @@ for i in range(num_territories):
         "resale_inquiry": st.session_state[f"resale_inquiry_{i}"]
     }
     result = calculate_incentive(inputs, designation, responsibility)
-
     total_final_incentive += result['final']
 
     st.markdown(f"""
@@ -154,6 +159,7 @@ achieved_list = [st.session_state.get(
     f"achieved_{i}", 0) for i in range(num_territories)]
 budget_list = [st.session_state.get(
     f"budget_{i}", 0) for i in range(num_territories)]
+
 
 yearly_sales = st.checkbox(
     "Check this box if these are your Fiscal Year Sales.", key=f"yearly_target")
